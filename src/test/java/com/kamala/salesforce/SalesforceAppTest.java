@@ -162,7 +162,7 @@ public class SalesforceAppTest extends ReusableMethods {
         Thread.sleep(5000);
         WebElement pword = driver.findElement(By.id("password"));
         creatingText(pword, "Apple@123", "passWord");
-        WebElement rememberMe = driver.findElement(By.xpath("//input[@id='rememberUnkaml']"));
+        WebElement rememberMe = driver.findElement(By.xpath("//input[@id='rememberUn']"));
         clickButton(rememberMe, "RememberMe");
         //captureScreenShots("TC3_RememberMe");
         WebElement userLogin = driver.findElement(By.id("Login"));
