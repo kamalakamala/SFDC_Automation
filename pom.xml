@@ -60,10 +60,10 @@
                <artifactId>maven-surefire-plugin</artifactId>
                <version>2.19.1</version>
                <configuration>
-                  <!-- <suiteXmlFiles>
-                       &lt;!&ndash; TestNG suite XML files &ndash;&gt;
+                   <suiteXmlFiles>
+                       <!-- TestNG suite XML files -->
                        <suiteXmlFile>testng.xml</suiteXmlFile>
-                   </suiteXmlFiles>-->
+                   </suiteXmlFiles>
                </configuration>
            </plugin>
 
