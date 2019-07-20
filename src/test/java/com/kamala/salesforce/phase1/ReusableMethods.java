@@ -1,4 +1,4 @@
-package com.kamala.salesforce;
+package com.kamala.salesforce.phase1;
 
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.io.FileUtils;
@@ -15,9 +15,9 @@ import java.io.File;
 
 
 public class ReusableMethods {
-    static WebDriver driver;
-    static ExtentReports reports;
-    static ExtentTest logger;
+    public static WebDriver driver;
+    public static ExtentReports reports;
+    public static ExtentTest logger;
 
 
 
