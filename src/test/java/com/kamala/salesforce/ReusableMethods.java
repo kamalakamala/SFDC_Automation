@@ -1,7 +1,10 @@
-package com.kamala.salesforce.phase1;
+package com.kamala.salesforce;
 
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,6 +15,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 
 public class ReusableMethods {
@@ -20,7 +24,10 @@ public class ReusableMethods {
     public static ExtentTest logger;
 
 
-
+    public static ExtentTest CreateTestScriptReport(String TestScriptName) {
+        logger = reports.startTest(TestScriptName);
+        return logger;
+    }
     //Comparing two Strings
     public static void stringCompare(WebElement obj, String expectedMsg) {
         String actualMsg = obj.getText();
@@ -63,13 +70,50 @@ public class ReusableMethods {
         }
     }
 
-    public static void dropDown(WebElement obj, String text, String dropDown) {
+    public static String[][] readXlData(String path, String string) throws Exception {
+
+        FileInputStream fs = new FileInputStream(new File(path));
+        XSSFWorkbook wb = new XSSFWorkbook(fs);
+
+        XSSFSheet sheet = wb.getSheet("Sheet1");
+        int rowCount = sheet.getLastRowNum() + 1;
+        int colCount = sheet.getRow(0).getLastCellNum();
+        String[][] data = new String[rowCount][colCount];
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
+                int cellType = sheet.getRow(i).getCell(j).getCellType();
+                if (cellType == HSSFCell.CELL_TYPE_NUMERIC) {
+                    int val = (int) sheet.getRow(i).getCell(j).getNumericCellValue();
+                    data[i][j] = String.valueOf(val);
+                } else
+                    data[i][j] = sheet.getRow(i).getCell(j).getStringCellValue();
+            }
+        }
+        return data;
+    }
+
+
+    public static void actionMethod(WebElement obj){
+        if(obj.isEnabled()){
+            Actions action = new Actions(driver);
+            action.moveToElement(obj).build().perform();
+            System.out.println("Pass: Curser moved to particular element successfully");
+            logger.log(LogStatus.PASS,"Curser moved to particular element successfully" );
+        }else{
+            System.out.println("Fail: element is disabled");
+            logger.log(LogStatus.FAIL,"Action operation failed" );
+
+        }
+    }
+
+
+    public static void selectdropDown(WebElement obj, String text, String elementName) {
         if (obj.isEnabled()) {
-            System.out.println(" Pass : " + dropDown + " is  available");
+            System.out.println(" Pass : " + elementName + " is  available");
             Select select = new Select(obj);
             select.selectByVisibleText(text);
         } else {
-            System.out.println("Fail: " + dropDown + " is not available");
+            System.out.println("Fail: " + elementName + " is not available");
 
         }
     }

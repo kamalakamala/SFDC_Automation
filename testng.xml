@@ -3,8 +3,9 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/Users/kamal/IdeaProjects/xeroapplication">
         <classes>
-            <class name="com.kamala.salesforce.phase1.SalesforceAppTest">
-            </class>
+            <class name="com.kamala.salesforce.phase1.SalesforceAppTest" />
+
+            <class name ="com.kamala.salesforce.phase2.Salesforcephase2AppTest"/>
         </classes>
     </test>
 </suite>
