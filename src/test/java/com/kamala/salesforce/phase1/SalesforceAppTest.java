@@ -1,5 +1,6 @@
-package com.kamala.salesforce;
+package com.kamala.salesforce.phase1;
 
+import com.kamala.salesforce.ReusableMethods;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
